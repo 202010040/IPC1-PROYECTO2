@@ -7,8 +7,8 @@ app = Flask (__name__)
 
 @app.route ("/login", methods = ["POST"])
 def index ():
-   # creo variables de busqueda, si el resultado coincide, la variable no quedara vacia
-    busqueda_admin = [admi for admi in administrador if admi ["usuario"] == request.json ["usuario"] and admi ["contraseña"] == request.json ["contraseña"] ] 
+   # Creo variables de busqueda, si el resultado coincide, la variable no quedara vacia
+    usqueda_admin = [admi for admi in administrador if admi ["usuario"] == request.json ["usuario"] and admi ["contraseña"] == request.json ["contraseña"] ] 
     busqueda_paciente = [paciente for paciente in pacientes if paciente ["usuario"] == request.json ["usuario"] and paciente ["contraseña"] == request.json ["contraseña"]]
     busqueda_doctor = [doctor for doctor in doctores if doctor ["usuario"] == request.json ["usuario"] and doctor ["contraseña"] == request.json ["contraseña"]]
     busqueda_enfermera = [enfermera for enfermera in enfermeras if enfermera ["usuario"] == request.json ["usuario"] and enfermera["contraseña"] == request.json["contraseña"] ]
