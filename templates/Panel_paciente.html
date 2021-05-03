@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free mobile app HTML landing page template to help you build a great online presence for your app which will convert visitors into users">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
+
+    <!-- Website Title -->
+    <title>Panel paciente</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet">
+    <link href="../static/panel_paciente/css/bootstrap.css" rel="stylesheet">
+    <link href="../static/panel_paciente/css/fontawesome-all.css" rel="stylesheet">
+    <link href="../static/panel_paciente/css/swiper.css" rel="stylesheet">
+	<link href="../static/panel_paciente/css/magnific-popup.css" rel="stylesheet">
+	<link href="../static/panel_paciente/css/styles.css" rel="stylesheet">
+	
+	<!-- Favicon  -->
+    <link rel="icon" href="../static/panel_paciente/images/favicon.png">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+        <!-- Text Logo - Use this if you don't have a graphic logo -->
+        <!-- <a class="navbar-brand logo-text page-scroll" href="index.html">Leno</a> -->
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-awesome fas fa-bars"></span>
+            <span class="navbar-toggler-awesome fas fa-times"></span>
+        </button>
+        <!-- end of mobile menu toggle button -->
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#header">INICIO <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#features">PEDIR CITA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#details">COMPRAR MEDICAMENTOS</a>
+                </li>
+                <form action="/cerrar_sesion_paciente" method="POST">
+                    <button class = "btn btn-info" type = "submit">SALIR</button>
+                  </form>   
+            </ul>
+            </span>
+        </div>
+    </nav> <!-- end of navbar -->
+    <!-- end of navbar -->
+
+
+    <!-- Header -->
+    <header id="header" class="header">
+        <div class="header-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h1>Hola  {{paciente_nombre}} </h1> <br><h2> En este portal tu puedes: <span id="js-rotating"> editar tu perfil, comprar medicamentos, solicitar una cita </span></h2><br>
+                            <p class="p-large">En UHospítal nuestro lema es cuidar, servir y proteger</p>
+                            <form action="../editar_paciente_desde_paciente/{{paciente_nombre}}" >
+                            <button type = "submit" class="btn-solid-lg page-scroll" href="../editar_paciente_desde_paciente/{{paciente_nombre}}">EDITAR PERFIL</button>
+                            </form>
+                        </div>
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <div class="image-container">
+                            <img class="img-fluid" src="../static/panel_paciente/images/header-iphone.png" alt="alternative">
+                        </div> <!-- end of image-container -->
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of header-content -->
+    </header> <!-- end of header -->
+    <!-- end of header -->
+
+    <!-- Features -->
+    <div id="contact" class="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                   
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    
+                    <!-- Contact Form -->
+                    <h3>Puedes solicitar una cita aqui</h3>
+                    <form id="features" data-toggle="validator" data-focus="false" action = "/solicitar_cita/{{paciente_nombre}}" method = "POST">
+                        <div class="form-group">
+                            <label for="cc-payment" class="control-label mb-1">Fecha</label>
+                            <input id="fecha" name="fecha" type="date" class="form-control" aria-required="true" aria-invalid="false" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cc-payment" class="control-label mb-1">Hora</label>
+                            <input id="hora" name="hora" type="time" class="form-control" aria-required="true" aria-invalid="false" >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Motivo" class="control-label mb-1">Motivo</label>
+                            <input id="motivo" name="motivo" type="text" class="form-control" aria-required="true" aria-invalid="false" >
+                        </div>
+                       
+                        <div>
+                            <button id="solicitar" type="submit" class="btn btn-lg btn-info btn-block">
+                                <span id="payment-button-amount">Solicitar</span>
+                                <span id="payment-button-sending" style="display:none;">Solicitando...</span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form -->
+    <!-- end of features -->
+
+    {% for iterador in lista_medicamentos %}
+    <!-- Details 2 -->
+    <div class="basic-3" id = "details" >
+        <div class="second">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="text-container">
+                            <h3>{{iterador ["nombre"]}}</h3>
+                            <p>{{iterador ["descripcion"]}}</p>
+                            <a class="btn-solid-reg popup-with-move-anim" href="#{{ iterador['id'] }}">Ver mas</a>
+                        </div> <!-- end of text-container -->
+                    </div> <!-- end of col -->
+                    <div class="col-lg-6">
+                        <img class="img-fluid" src="../static/panel_paciente/images/details-2-iphone.png" alt="alternative">
+                    </div> <!-- end of col -->
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </div> <!-- end of second -->
+
+    <!-- end of details 2 -->
+	
+
+    <!-- Details Lightboxes -->
+
+  
+    <!-- Lightbox -->
+
+    <div id="{{ iterador['id'] }}" class="lightbox-basic zoom-anim-dialog mfp-hide">
+     
+		<div class="row">
+			<button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+			<div class="col-lg-6">
+				<img class="img-fluid" src="../static/panel_paciente/images/details-lightbox-2.png" alt="alternative">
+			</div>
+			<div class="col-lg-6">
+				<h3>{{ iterador["nombre"] }}</h3>
+                <p>{{ iterador["descripcion"] }}</p>
+                <h4>Mas detalles</h4>
+
+                         <form action = "/añadir/orden/{{iterador ['nombre']}}" method="POST">
+
+                                <label>Precio por unidad : {{ iterador ["precio"]}}  </label><br>
+
+                                     <label>Cantidad a ordenar  : </label>
+
+                                     <div class="form-group">
+                                        <select id = "cantidad_ordenada" name = "cantidad_ordenada" class = "form-control-sm form-control">   
+                                         {% for i in range (0,  iterador ["cantidad"] + 1   )%} 
+                                         <option  value= "{{i}}"  >  {{i}} </option>         
+                                         {% endfor %}
+                                        </select> </div><br>
+
+                                        <div class="form-group">  
+                                            <input type="radio"  name="paciente_nombre" value="{{paciente_nombre}}"   checked >
+                                            <label for="aceptar" >Acepto todos los recargos posibles que haya por papeleo o servicio a domicilio </label>
+                                        </div><br>
+                                       
+                                        <td><button type="submit" class="btn btn-info"   href = "{{iterador['nombre']}}"  >Comprar</button></td>
+                                        </form>
+			</div>
+		</div> <!-- end of row -->
+    </div> <!-- end of lightbox-basic -->
+    <!-- end of lightbox -->
+    </div> <!-- end of basic-3 -->    
+   
+    <!-- end of details lightboxes -->
+   {% endfor %}	
+    
+    <div class="tabs" id ="carrito">
+        <h3 class="box-title">Tu Carrito de compras</h3><br><br>
+
+        <div class = "row">
+            <div class="col-md-4">
+                <div class="footer-col ">
+                    <h4>Nombre:</h4>
+                     {% for iterador in lista_pedidos %}
+                    <p>{{iterador ["nombre"]}}</p>
+                    {% endfor %}
+                </div>
+            </div> <!-- end of col -->
+
+            <div class="col-md-4">
+                <div class="footer-col ">
+                    <h4>Precio a pagar:</h4>
+                     {% for iterador in lista_pedidos %}
+                    <p>{{iterador ["precio_unitario"]}} x {{iterador ["cantidad"]}} = {{iterador ["cantidad"] * iterador ["precio_unitario"]   }}</p>
+                    {% endfor %}
+                </div>
+            </div> <!-- end of col -->
+
+       
+            
+            <br>
+            <div class="col-md-6"></div>
+                <div class="col-xl-4">
+                    <h2> Total:  {{total_pedido}}  </h2>
+                    <form action = "/generar_pedido/{{paciente_nombre}}" method="POST">
+                        <button type="submit" class="btn btn-primary btn-sm btn-block">Generar pedido</button>
+                       </form>
+                </div>
+            </div> <!-- end of col -->
+
+        </div>
+
+        <div class = "row">
+        </div>
+
+    </div>
+
+
+    <!-- Contact -->
+    <div id="contact" class="form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                   
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    
+                  
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of form -->
+    <!-- end of contact -->
+
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-col">
+                        <h4>Creado por:</h4>
+                        <p>202010040 Evelio Cruz</p>
+                    </div>
+                </div> <!-- end of col -->
+                <div class="col-md-4">
+                    <div class="footer-col middle">
+                        <h4>Catedraticos:</h4>
+                        <p>Ing Marlon Francisco Orellana Lopez</p>
+                        <p>Aux Javier Golon</p>
+                        <p>Aux Herbert Reyes</p>
+                    </div>
+                    </div>
+                </div> <!-- end of col -->
+
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of footer -->  
+    <!-- end of footer -->
+
+
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="p-small">Copyright © Este es un proyecto universitario sin animos de lucro, asignado por parte de la: <a href="https://portal.ingenieria.usac.edu.gt/">Facultad de Ingenieria de la Universidad de San Carlos de Guatemala</a></p>
+                </div> <!-- end of col -->
+            </div> <!-- enf of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of copyright --> 
+    <!-- end of copyright -->
+    
+    	
+    <!-- Scripts -->
+    <script src="../static/panel_paciente/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+    <script src="../static/panel_paciente/js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+    <script src="../static/panel_paciente/js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="../static/panel_paciente/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+    <script src="../static/panel_paciente/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="../static/panel_paciente/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+    <script src="../static/panel_paciente/js/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
+    <script src="../static/panel_paciente/js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+    <script src="../static/panel_paciente/js/scripts.js"></script> <!-- Custom scripts -->
+</body>
+</html>

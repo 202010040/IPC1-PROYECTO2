@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags-->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="au theme template">
+	<meta name="author" content="Hau Nguyen">
+	<meta name="keywords" content="au theme template">
+
+	<!-- Title Page-->
+	<title>Panel enfermera</title>
+
+	<!-- Fontfaces CSS-->
+	<link href="../static/editor/css/font-face.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+	<!-- Bootstrap CSS-->
+	<link href="../static/editor/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+	<!-- Vendor CSS-->
+	<link href="../static/editor/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/wow/animate.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/slick/slick.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+	<link href="../static/editor/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+	<!-- Main CSS-->
+	<link href="../static/editor/css/theme.css" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+	<div class="page-wrapper">
+		<!-- MENU SIDEBAR-->
+		<aside class="menu-sidebar d-none d-lg-block">
+			<div class="logo">
+				<a href="#">
+					<img src="../static/editor/images/icon/logo.png" alt="Cool Admin" />
+				</a>
+			</div>
+			<div class="menu-sidebar__content js-scrollbar1">
+				<nav class="navbar-sidebar">
+					<ul class="list-unstyled navbar__list">
+						<li>
+							<a href="table.html"></i>Principal</a>
+						</li>
+						<li>
+							<a href="../editar_enfermera_desde_enfermera/{{doctor_nombre}}"></i>Perfil</a>
+						</li>
+						<li>
+							<a href="../"></i>Cerrar sesion</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</aside>
+		<!-- END MENU SIDEBAR-->
+
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- MAIN CONTENT-->
+			<div class="main-content">
+							<!-- /# column -->
+								<div class="card">
+									<div class="card-header">
+										<h4>Bienvenida enfermera {{enfermera_nombre}}</h4>
+									</div>
+									<div class="card-body">
+										<p class="text-muted m-b-15">desde aqui puedes administrar las citas con su respectivo status, ya sea aceptadas, rechazadas o pendientes
+											puedes aceptar o rechazar citas y generar facturas
+										</p>
+
+										<ul class="nav nav-tabs" id="myTab" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link active" id="home-tab" data-toggle="tab" href="#citas_pendientes" role="tab" aria-controls="home" aria-selected="true">Citas pendientes</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="profile-tab" data-toggle="tab" href="#citas_aceptadas" role="tab" aria-controls="profile" aria-selected="false">Citas aceptadas</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" id="contact-tab" data-toggle="tab" href="#generar_factura" role="tab" aria-controls="contact" aria-selected="false">Generar facturas</a>
+											</li>
+										</ul>
+										<div class="tab-content pl-3 p-1" id="myTabContent">
+											<div class="tab-pane fade show active" id="citas_pendientes" role="tabpanel" aria-labelledby="home-tab">
+												<h3>Citas pendientes</h3>
+											
+												
+												
+												<div class="table-responsive">	
+												<table class="table text-nowrap">
+													<thead>
+														<tr>		
+															<th class="border-top-0">Paciente</th>
+															<th class="border-top-0">Fecha</th>
+															<th class="border-top-0">Hora</th>
+															<th class="border-top-0">Motivo de la cita</th>
+															<th class="border-top-0">Elegir doctor y aceptar</th>
+															<th class="border-top-0">Eliminar</th>
+														</tr>
+													</thead>
+													<tbody>
+												
+											
+														{% for iterador in lista_citas %}
+														{% if iterador ["estado"] == "pendiente" %}
+														<tr>
+															<td>{{iterador ["paciente"]}}</td>
+															<td>{{iterador ["fecha"]}}</td>
+															<td>{{iterador ["hora"]}}</td>
+															<td>{{iterador ["motivo"]}}</td>
+															
+															<form action = "/{{enfermera_nombre}}/{{ iterador['motivo']}} " method = "POST">
+															<td><select id = "doctor" name = "doctor">
+																{%for i in lista_doctores %}
+																<option> {{i ["nombre"] }} </option>
+																{% endfor %}
+															</select>
+															<button type="submit" class="btn btn-success" >Aceptar</button></td>
+															</form>
+															
+															<form action = "/rechazar/{{enfermera_nombre}} /{{ iterador['motivo']}} " method="POST">
+															<td><button type="submit" class="btn btn-danger"   method = "POST"  >Rechazar</button></td>
+															</form>
+				
+														</tr>
+														{% endif %}
+														{% endfor %}	
+															
+													</tbody>
+												</table>
+												</div>
+													
+												
+
+
+											</div>
+											<div class="tab-pane fade" id="citas_aceptadas" role="tabpanel" aria-labelledby="profile-tab">
+												<h3>Citas aceptadas</h3>
+												
+												
+														
+												
+												<div class="table-responsive">	
+													<table class="table text-nowrap">
+														<thead>
+															<tr>		
+																<th class="border-top-0">Paciente</th>
+																<th class="border-top-0">Fecha</th>
+																<th class="border-top-0">Hora</th>
+																<th class="border-top-0">Doctor que la atendera</th>
+																<th class="border-top-0">Motivo de la cita</th>
+															
+															</tr>
+														</thead>
+														<tbody>
+													
+												
+															{% for iterador in lista_citas %}
+															{% if iterador ["estado"] == "aceptada" %}
+
+															<tr>
+																<td>{{iterador ["paciente"]}}</td>
+																<td>{{iterador ["fecha"]}}</td>
+																<td>{{iterador ["hora"]}}</td>
+																<td>{{iterador ["doctor"]}}</td>
+																<td>{{iterador ["motivo"]}}</td>
+																
+															</tr>
+															{% endif %}
+															{% endfor %}	
+																
+														</tbody>
+													</table>
+													</div>
+														
+
+												
+
+
+											</div>
+											<div class="tab-pane fade" id="generar_factura" role="tabpanel" aria-labelledby="contact-tab">
+												<h3>Generar factura</h3>
+												
+												
+												<form id="features" data-toggle="validator" data-focus="false" action = "/generar_factura" method = "POST">
+													
+							
+													<div class="form-group">
+														<label for="cc-payment" class="control-label mb-1">Fecha</label>
+														<input id="fecha" name="fecha" type="date" class="form-control" aria-required="true" aria-invalid="false" required>
+													</div>
+													
+
+													<div class="form-group">
+														<label for="cc-payment" class="control-label mb-1">Paciente</label>
+													<select id = "paciente" name = "paciente" class = "form-control-sm form-control"required>
+														{%for i in lista_pacientes %}
+														<option> {{i ["nombre"] }} {{i ["apellido"] }} </option>
+														{% endfor %}
+													</select>
+													</div>
+
+													<div class="form-group">
+														<label for="cc-payment" class="control-label mb-1">Doctor</label>
+														<select id = "doctor" name = "doctor" class = "form-control-sm form-control"required>
+															{%for i in lista_doctores %}
+															<option> {{i ["nombre"] }} {{i ["apellido"] }}  </option>
+															{% endfor %}
+														</select>
+													</div>
+													
+
+													<div class="form-group">
+														<label for="Motivo" class="control-label mb-1">Precio Consulta</label>
+														<input id="consulta" name="consulta" type="text" class="form-control" aria-required="true" aria-invalid="false" value = "0" required>
+													</div>
+
+													<div class="form-group">
+														<label for="Motivo" class="control-label mb-1">Costo Operacion</label>
+														<input id="operacion" name="operacion" type="text" class="form-control" aria-required="true" aria-invalid="false" value = "0">
+													</div>
+												   
+													<div class="form-group">
+														<label for="Motivo" class="control-label mb-1">Costo internado</label>
+														<input id="internado" name="internado" type="text" class="form-control" aria-required="true" aria-invalid="false" value = "0" >
+													</div>
+
+													<div class="form-group">
+														<label for="Motivo" class="control-label mb-1">Total</label>
+														<input id="total" name="total" type="text" class="form-control" aria-required="true" aria-invalid="false" required>
+													</div>
+
+													<div>
+														<button id="solicitar" type="submit" class="btn btn-lg btn-info btn-block">
+															<span id="payment-button-amount">Generar factura</span>
+															<span id="payment-button-sending" style="display:none;">Solicitando...</span>
+														</button>
+													</div>
+							
+												</form>
+
+
+
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			<!-- END PAGE CONTAINER-->
+		</div>
+		<!-- Jquery JS-->
+		<script src="../static/editor/vendor/jquery-3.2.1.min.js"></script>
+		<!-- Bootstrap JS-->
+		<script src="../static/editor/vendor/bootstrap-4.1/popper.min.js"></script>
+		<script src="../static/editor/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+		<!-- Vendor JS       -->
+		<script src="../static/editor/vendor/slick/slick.min.js">
+		</script>
+		<script src="../static/editor/vendor/wow/wow.min.js"></script>
+		<script src="../static/editor/vendor/animsition/animsition.min.js"></script>
+		<script src="../static/editor/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+		</script>
+		<script src="../static/editor/vendor/counter-up/jquery.waypoints.min.js"></script>
+		<script src="../static/editor/vendor/counter-up/jquery.counterup.min.js">
+		</script>
+		<script src="../static/editor/vendor/circle-progress/circle-progress.min.js"></script>
+		<script src="../static/editor/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+		<script src="../static/editor/vendor/chartjs/Chart.bundle.min.js"></script>
+		<script src="../static/editor/vendor/select2/select2.min.js">
+		</script>
+		<!-- Main JS-->
+		<script src="../static/editor/js/main.js"></script>
+</body>
+</html>
+<!-- end document-->

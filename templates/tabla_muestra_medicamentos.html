@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <h3>
+       Listado de medicamentos
+   </h3>
+</head>
+<div class="container">
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Descripcion</th>
+				<th>Precio</th>
+				<th>Stock</th>
+			</tr>
+		</thead>
+		<tbody>
+            {% for iterador in lista_medicamentos%}
+            <tr>
+                <td>{{iterador ["nombre"]}}</td>
+                <td>{{iterador ["descripcion"]}}</td>
+                <td>{{iterador ["precio"]}}</td>
+                <td>{{iterador ["cantidad"]}}</td>
+            </tr>
+            {% endfor %}	
+		</tbody>
+	</table>
+</div>
+</html>

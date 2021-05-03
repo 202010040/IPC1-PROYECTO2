@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <h3>
+       Listado de pacientes
+   </h3>
+</head>
+<div class="container">
+	<table>
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Genero</th>
+				<th>Usuario</th>
+                <th>Telefono</th>
+			</tr>
+		</thead>
+		<tbody>
+            {% for iterador in lista_pacientes %}
+            <tr>
+                <td>{{iterador ["nombre"]}}</td>
+                <td>{{iterador ["apellido"]}}</td>
+                <td>{{iterador ["fecha de nacimiento"]}}</td>
+                <td>{{iterador ["usuario"]}}</td>
+                <td>{{iterador ["telefono"]}}</td>
+            </tr>
+            {% endfor %}	
+		</tbody>
+	</table>
+</div>
+</html>

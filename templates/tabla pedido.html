@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+</head></div><div id="app" class="col-11">
+<body>
+
+    <div class="row my-3">
+      <div class="col-10">
+        <h1>Uhospital</h1>
+        <p>Universidad de San Carlos de Guatemala</p>
+        <p>Facultad de Ingenieria</p>
+        <p>Introduccion a la computacion y a la programacion 1</p>
+      </div>
+    </div>
+  
+    <hr />
+  
+    <div class="row fact-info mt-3">
+      <div class="col-3">
+        <h5>Pedido de:</h5>
+        <p>
+          {{paciente_nombre}} 
+        </p>
+      </div>
+      
+    </div>
+  
+    <div class="row my-5">
+      <table class="table table-borderless factura">
+        <thead>
+          <tr>
+            <th>Nombre del producto : </th>
+            <th>Precio Unitario: </th>
+            <th>Cantidad ordenada: </th>
+            <th></th>
+            <th>Importe:</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for iterador in lista_pedidos %}
+          <tr>
+            <td> {{iterador ["nombre"]}} </td>
+            <td> {{iterador ["precio_unitario"]}} </td>
+            <td> {{iterador ["cantidad"]}} </td>
+            <td></td>
+            <td> {{iterador["cantidad"]*iterador ["precio_unitario"]}}  </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Total Pedido {{total}}  </th>
+            
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  
+    <div class="cond row">
+      <div class="col-12 mt-3">
+       
+      </div>
+    </div>
+</div>
+</div></body>
+</html>
