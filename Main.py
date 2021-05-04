@@ -1,6 +1,8 @@
-from flask import Flask, request, jsonify, redirect, render_template, make_response
+from flask import Flask, request, jsonify, redirect, render_template, make_response, url_for, send_from_directory
 from operator import itemgetter
-import json, csv, pdfkit, operator
+import json, csv, pdfkit, operator, os
+
+
 
 
 doctores = []
@@ -24,6 +26,12 @@ facturas = []
 
 
 app = Flask (__name__)
+
+UPLOAD_FOLDER = os.path.abspath ("./")
+
+
+app.config ["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
 
 @app.route ("/", methods = ["GET" ,"POST"])
 def index ():
@@ -213,18 +221,19 @@ def modificar_medicamento (medicamento_nombre):
     return render_template ("Editar_medicamento.html" , medicamento_nombre = busqueda_medicamento[0]["nombre"], medicamento_precio = busqueda_medicamento [0]["precio"], medicamento_descripcion = busqueda_medicamento [0]["descripcion"] ,medicamento_cantidad = busqueda_medicamento [0]["cantidad"] )
 
 #MODIFICAR ADMIN
-@app.route ("/editar_admin")
+@app.route ("/editar_admin", methods = ["GET", "POST"])
 def editar_admin ():
+  return render_template ("Editar admin.html" , admin_nombre = administrador [0] ["nombre"] , admin_apellido = administrador [0] ["apellido"], admin_usuario = administrador [0] ["usuario"] , admin_contraseña = administrador [0] ["contraseña"] )
+
+@app.route ("/editar_desde_admin", methods = ["GET", "POST"])
+def editar_desde_admin ():
+ 
   if request.method == "POST":
-     administrador [0] ["nombre"] = request.form ["nombre"]
+     administrador [0] ["nombre"] =  request.form ["nombre"]
      administrador [0] ["apellido"] = request.form ["apellido"]
      administrador [0] ["usuario"] = request.form ["usuario"]
      administrador [0] ["contraseña"] = request.form ["contraseña"]
      return redirect ("/login/admin")
-
-  return render_template ("Editar admin.html" , admin_nombre = administrador [0] ["nombre"] , admin_apellido = administrador [0] ["apellido"], admin_usuario = administrador [0] ["usuario"] , admin_contraseña = administrador [0] ["contraseña"] )
-
-
 
 
 #MODIFICAR PACIENTES DESDE PACIENTES
@@ -329,9 +338,10 @@ def pantalla_carga ():
 @app.route ("/carga_pacientes", methods  = ["GET", "POST"])
 def carga_paciente():
   if request.method == "POST":
-     ruta = request.form ["ruta"]
-
-     archivo = csv.DictReader (open(ruta))
+     f = request.files ["ruta"]
+     filename = f.filename
+     f.save ( os.path.join (app.config ["UPLOAD_FOLDER"], filename) )
+     archivo = csv.DictReader (open(filename))
      for columnas in archivo:
              new_paciente = {
              "nombre": columnas ["nombre"],
@@ -351,9 +361,12 @@ def carga_paciente():
 @app.route ("/carga_doctores", methods  = ["GET", "POST"])
 def carga_doctores():
   if request.method == "POST":
-     ruta = request.form ["ruta"]
 
-     archivo = csv.DictReader (open(ruta))
+     f = request.files ["ruta2"]
+     filename = f.filename
+     f.save ( os.path.join (app.config ["UPLOAD_FOLDER"], filename) )
+     archivo = csv.DictReader (open(filename))
+
      for columnas in archivo:
              new_doctor = {
              "nombre": columnas ["nombre"],
@@ -375,9 +388,10 @@ def carga_doctores():
 @app.route ("/carga_enfermera", methods  = ["GET", "POST"])
 def carga_anfermera():
   if request.method == "POST":
-     ruta = request.form ["ruta"]
-
-     archivo = csv.DictReader (open(ruta))
+     f = request.files ["ruta3"]
+     filename = f.filename
+     f.save ( os.path.join (app.config ["UPLOAD_FOLDER"], filename) )
+     archivo = csv.DictReader (open(filename))
      for columnas in archivo:
              new_paciente = {
              "nombre": columnas ["nombre"],
@@ -397,9 +411,10 @@ def carga_anfermera():
 @app.route ("/carga_medicamentos", methods  = ["GET", "POST"])
 def carga_medicamentos():
   if request.method == "POST":
-     ruta = request.form ["ruta"]
-
-     archivo = csv.DictReader (open(ruta))
+     f = request.files ["ruta4"]
+     filename = f.filename
+     f.save ( os.path.join (app.config ["UPLOAD_FOLDER"], filename) )
+     archivo = csv.DictReader (open(filename))
      for columnas in archivo:
              new_medicamento = {
              "id":columnas ["nombre"].replace(" ", "_") ,
@@ -734,3 +749,4 @@ if __name__ == "__main__":
    app.run ("0.0.0.0", port = 4545, debug = True)
 
 ## python Main.py
+
