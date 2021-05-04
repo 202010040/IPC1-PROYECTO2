@@ -216,10 +216,10 @@ def modificar_medicamento (medicamento_nombre):
 @app.route ("/editar_admin")
 def editar_admin ():
   if request.method == "POST":
-     administrador [0] ["nombre"]: request.form ["nombre"]
-     administrador [0] ["apellido"]: request.form ["apellido"]
-     administrador [0] ["usuario"]: request.form ["usuario"]
-     administrador [0] ["contraseña"]: request.form ["contraseña"]
+     administrador [0] ["nombre"] = request.form ["nombre"]
+     administrador [0] ["apellido"] = request.form ["apellido"]
+     administrador [0] ["usuario"] = request.form ["usuario"]
+     administrador [0] ["contraseña"] = request.form ["contraseña"]
      return redirect ("/login/admin")
 
   return render_template ("Editar admin.html" , admin_nombre = administrador [0] ["nombre"] , admin_apellido = administrador [0] ["apellido"], admin_usuario = administrador [0] ["usuario"] , admin_contraseña = administrador [0] ["contraseña"] )
